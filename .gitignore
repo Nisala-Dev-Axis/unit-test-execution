@@ -51,4 +51,4 @@ junit.xml
 !/tsconfig.paths.json
 !/jest.config.js
 /commit-script
-preCommit.ts
+/pre-commit-scripts

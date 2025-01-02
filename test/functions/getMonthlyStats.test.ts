@@ -1,7 +1,7 @@
 import getMonthlyStats from "../../src/functions/getMonthlyStats";
 import { WorkStatus } from "../../src/functions/types/enum";
 
-describe("Test get monthly stats", () => {
+describe("Test getMonthlyStats", () => {
     it("should return monthly stats", async () => {
         const result = await getMonthlyStats(
             "2024-10-12",
