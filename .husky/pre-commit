@@ -1,14 +1,14 @@
 #!/usr/bin/env sh
 
-CHANGED_FILES=$(git diff --name-only --cached | grep '^src/.*\.ts$' | grep -v '\.test\.ts$')
+CHANGED_FILES=$(git diff --name-only --cached | grep '^src/.*\.ts$' | grep -v '\.test\.ts$' || true)
 
-#if [[ -z $CHANGED_FILES ]]; then
-#  echo "No modified functions were found"
-#  exit 0
-#fi
-echo $CHANGED_FILES
-#./node_modules/.bin/tsc
+if [[ -z $CHANGED_FILES ]]; then
+  echo "No modified functions were found"
+  exit 0
+fi
 
-#regexString=$(node ./dist/pre-commit-scripts/codeShift.js $CHANGED_FILES)
+./node_modules/.bin/tsc
 
-#npx jest --testNamePattern="$regexString"
+regexString=$(node ./dist/pre-commit-scripts/codeShift.js $CHANGED_FILES)
+
+npx jest --testNamePattern="$regexString"
