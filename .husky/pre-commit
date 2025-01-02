@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-CHANGED_FILES=$(git diff --name-only --cached)
+CHANGED_FILES=$(git diff --name-only --cached | grep '^src/.*\.ts$' | grep -v '\.test\.ts$')
 
 #if [[ -z $CHANGED_FILES ]]; then
 #  echo "No modified functions were found"
