@@ -3,7 +3,6 @@ import { WorkStatus } from "../types/enum";
 import { IGetMonthlyStatsInput, IGetMonthlyStatsOutput } from "../types/interface";
 
 /**
- * 
  * @param dateString the current date utc string
  * @param inputData 
  */

@@ -1,14 +1,23 @@
 #!/usr/bin/env sh
 
+printf "\n\033[1mFinding modified files....\033[0m"
+
 CHANGED_FILES=$(git diff --name-only --cached | grep '^src/.*\.ts$' | grep -v '\.test\.ts$' || true)
 
 if [[ -z $CHANGED_FILES ]]; then
-  echo "No modified functions were found"
+  printf "\nNo modified files were found in the staging area"
+  printf "\nCommit hook status: \033[32mSUCCESS\033[0m\n\n"
   exit 0
 fi
 
 ./node_modules/.bin/tsc
 
+printf "\nDetermining modified function implementations..."
+
 regexString=$(node ./dist/pre-commit-scripts/codeShift.js $CHANGED_FILES)
 
+printf "\nExecuting affected tests...\n"
+
 npx jest --testNamePattern="$regexString"
+
+printf "\nCommit hook status: \033[32mSUCCESS\033[0m\n\n"
